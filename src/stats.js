@@ -1,2 +1,42 @@
-export const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0; export const median=a=>{if(!a.length)return 0;const b=[...a].sort((x,y)=>x-y);const m=Math.floor(b.length/2);return b.length%2?b[m]:(b[m-1]+b[m])/2};
-export function summarizeGoals(data){const m=data.map(d=>d.minute+d.stoppage_minute);const n=m.length||1; return{total:data.length,mean:mean(m),median:median(m),pct90:m.filter(x=>x>=90).length*100/n,pct75:m.filter(x=>x>=75).length*100/n,earliest:Math.min(...data.map(d=>d.tournament_year)),latest:Math.max(...data.map(d=>d.tournament_year))};}
+export function mean(values) {
+  if (!values.length) return 0;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+export function median(values) {
+  if (!values.length) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+export function summarizeGoals(data) {
+  const minutes = data
+    .map((d) => Number(d.minute) + Number(d.stoppage_minute || 0))
+    .filter(Number.isFinite);
+
+  const years = data.map((d) => Number(d.tournament_year)).filter(Number.isFinite);
+  const totalGoals = data.length;
+
+  if (!totalGoals) {
+    return {
+      totalGoals: 0,
+      meanMinute: 0,
+      medianMinute: 0,
+      pct90Plus: 0,
+      pctAfter75: 0,
+      minYear: null,
+      maxYear: null
+    };
+  }
+
+  return {
+    totalGoals,
+    meanMinute: mean(minutes),
+    medianMinute: median(minutes),
+    pct90Plus: (minutes.filter((m) => m >= 90).length / totalGoals) * 100,
+    pctAfter75: (minutes.filter((m) => m > 75).length / totalGoals) * 100,
+    minYear: years.length ? Math.min(...years) : null,
+    maxYear: years.length ? Math.max(...years) : null
+  };
+}
