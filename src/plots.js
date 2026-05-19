@@ -1,0 +1,5 @@
+import * as Plot from 'https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm';
+export function clearPlot(c){c.innerHTML='';}
+const colors={'Group':'#38bdf8','Round of 16':'#22c55e','Quarter-final':'#eab308','Semi-final':'#f97316','Third-place':'#a78bfa','Final':'#ef4444','Other':'#94a3b8'};
+export function renderScatter(data,container){clearPlot(container);container.append(Plot.plot({height:520,x:{domain:[0,120],label:'Match minute'},y:{label:'Tournament year'},color:{domain:Object.keys(colors),range:Object.values(colors),legend:true},marks:[Plot.dot(data,{x:'minute',y:'tournament_year',fill:'stage_group',r:3,fillOpacity:0.72,title:d=>`${d.player}\n${d.team} vs ${d.opponent}\n${d.display_minute} (${d.tournament_year})\n${d.stage}${d.is_penalty?'\nPenalty':''}${d.is_own_goal?'\nOwn goal':''}`})]}));}
+export function renderHeatmap(data,container){clearPlot(container);container.append(Plot.plot({height:520,x:{domain:[0,120],label:'Match minute'},y:{label:'Tournament year'},color:{scheme:'ylorrd',legend:true,label:'Goals per bin'},marks:[Plot.rect(data,Plot.bin({fill:'count'},{x:'minute',y:'tournament_year',title:(d)=>`${d.length} goals`}))]}));}

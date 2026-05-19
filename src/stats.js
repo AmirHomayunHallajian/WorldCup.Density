@@ -1,0 +1,2 @@
+export const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0; export const median=a=>{if(!a.length)return 0;const b=[...a].sort((x,y)=>x-y);const m=Math.floor(b.length/2);return b.length%2?b[m]:(b[m-1]+b[m])/2};
+export function summarizeGoals(data){const m=data.map(d=>d.minute+d.stoppage_minute);const n=m.length||1; return{total:data.length,mean:mean(m),median:median(m),pct90:m.filter(x=>x>=90).length*100/n,pct75:m.filter(x=>x>=75).length*100/n,earliest:Math.min(...data.map(d=>d.tournament_year)),latest:Math.max(...data.map(d=>d.tournament_year))};}
