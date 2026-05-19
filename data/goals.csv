@@ -1,0 +1,4 @@
+tournament_year,match_id,minute,stoppage_minute,display_minute,player,team,opponent,stage,stage_group,is_knockout,is_penalty,is_own_goal
+2022,3857256,3,0,3,Enner Valencia,Ecuador,Qatar,Group A,Group,false,false,false
+2022,3857259,90,8,90+8,Richarlison,Brazil,Serbia,Group G,Group,false,false,false
+2018,300331507,109,0,109,Mario Mandzukic,Croatia,France,Final,Final,true,false,false
