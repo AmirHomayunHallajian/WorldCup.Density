@@ -2,8 +2,7 @@
 A single interactive chart that reveals the temporal rhythm of World Cup goals, from early shocks to stoppage-time drama.
 
 ## Live demo
-https://<your-username>.github.io/worldcup-goal-density/
-
+https://<your-username>.github.io/WorldCup.Density/
 ## Hero screenshot
 ![Scatter view](docs/assets/screenshot-scatter.png)
 
