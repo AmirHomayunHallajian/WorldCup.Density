@@ -2,7 +2,7 @@
 A single interactive chart that reveals the temporal rhythm of World Cup goals, from early shocks to stoppage-time drama.
 
 ## Live demo
-https://<your-username>.github.io/worldcup-goal-density/
+https://amirhomayunhallajian.github.io/WorldCup.Density/
 
 ## Hero screenshot
 ![Scatter view](docs/assets/screenshot-scatter.png)
@@ -11,7 +11,7 @@ https://<your-username>.github.io/worldcup-goal-density/
 Portfolio project showing reproducible data cleaning + no-build interactive visualization.
 
 ## What you can explore
-Scatter/heatmap view, team and stage filters, knockout/penalty/own-goal toggles, minute/year windows, and live goal-timing summary.
+Five linked views — scatter, density heatmap, minute histogram, per-tournament totals, and stage-by-stage breakdown — driven by a shared filter set (team, stage, knockout/penalty/own-goal toggles, minute/year windows, optional stoppage-time inclusion). Live summary cards and ranked lists of top scorers and most prolific teams update with every change.
 
 ## Methods
 - `scripts/prepare_data.py` downloads source CSVs, reconciles likely column names, normalizes minute + stoppage time, standardizes stage groups, and writes compact `data/goals.csv`.
