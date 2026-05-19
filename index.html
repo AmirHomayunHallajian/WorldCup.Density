@@ -1,4 +1,82 @@
-<!doctype html><html><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>World Cup Goal Density Explorer</title><script src='https://cdn.tailwindcss.com'></script><script src='https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js'></script><script src='https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm' type='module'></script><link rel='stylesheet' href='style.css'/></head>
-<body class='bg-slate-950 text-slate-100 min-h-screen'><main class='max-w-7xl mx-auto p-4 md:p-8'>
-<header class='mb-6'><h1 class='text-3xl font-bold'>World Cup Goal Density Explorer</h1><p class='text-slate-300'>Every men’s World Cup goal, plotted by match minute and tournament year.</p><p class='text-slate-400 mt-2 italic'>Football has a rhythm. This chart shows where goals cluster, when pressure spikes, and how stoppage time changed the shape of the game.</p></header>
-<div class='grid md:grid-cols-12 gap-4'><aside class='md:col-span-3 card p-4' id='controls'></aside><section class='md:col-span-9 space-y-4'><div class='card p-3'><div id='viewToggle' class='mb-2'><button data-view='scatter' class='toggle active'>Goals scatter</button><button data-view='heatmap' class='toggle'>Density heatmap</button></div><div id='plot'></div></div><div id='summary' class='grid grid-cols-2 md:grid-cols-4 gap-3'></div><div class='card p-4 text-slate-300' id='interpretation'></div></section></div></main><script type='module' src='src/main.js'></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>World Cup Goal Density Explorer</title>
+  <meta name="description" content="Every men's World Cup goal (1930–2022), plotted by match minute and tournament year. Filter by team, stage, and goal type to explore the temporal rhythm of football's biggest stage." />
+  <meta property="og:title" content="World Cup Goal Density Explorer" />
+  <meta property="og:description" content="Interactive visualization of 3,600+ World Cup goals by minute and year." />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <main class="max-w-7xl mx-auto p-4 md:p-8">
+    <header class="mb-8">
+      <div class="flex items-baseline justify-between flex-wrap gap-2">
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+          World Cup <span class="text-sky-400">Goal Density</span> Explorer
+        </h1>
+        <span id="dataBadge" class="text-xs text-slate-400 font-mono"></span>
+      </div>
+      <p class="text-slate-300 mt-2 max-w-3xl">
+        Every men's World Cup goal from 1930 to 2022, plotted by match minute and tournament year.
+        Filter by team, stage, and goal type to explore where goals cluster, when pressure spikes,
+        and how stoppage time reshaped the game.
+      </p>
+    </header>
+
+    <div class="grid md:grid-cols-12 gap-4">
+      <aside class="md:col-span-3 card p-4 space-y-3" id="controls">
+        <p class="text-sm text-slate-400">Loading filters…</p>
+      </aside>
+
+      <section class="md:col-span-9 space-y-4">
+        <div class="card p-4">
+          <div id="viewToggle" class="flex flex-wrap gap-2 mb-3">
+            <button data-view="scatter" class="toggle active" title="Each dot is one goal">Scatter</button>
+            <button data-view="heatmap" class="toggle" title="2D binned density">Heatmap</button>
+            <button data-view="minute" class="toggle" title="Goals by match minute">Minute histogram</button>
+            <button data-view="year" class="toggle" title="Goals per tournament">Per tournament</button>
+            <button data-view="stage" class="toggle" title="Goals by knockout stage">By stage</button>
+          </div>
+          <div id="plotMeta" class="text-xs text-slate-400 mb-2"></div>
+          <div id="plot" class="min-h-[420px]"></div>
+        </div>
+
+        <div id="summary" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="card p-4">
+            <h3 class="text-sm uppercase tracking-wider text-slate-400 mb-2">Top scorers</h3>
+            <div id="topScorers"></div>
+          </div>
+          <div class="card p-4">
+            <h3 class="text-sm uppercase tracking-wider text-slate-400 mb-2">Most prolific teams</h3>
+            <div id="topTeams"></div>
+          </div>
+        </div>
+
+        <div class="card p-4 text-slate-300 leading-relaxed" id="interpretation">
+          Loading interpretation…
+        </div>
+
+        <footer class="text-xs text-slate-500 pt-4 pb-2">
+          Source:
+          <a class="underline hover:text-slate-300" href="https://github.com/jfjelstul/worldcup" target="_blank" rel="noopener">
+            The Fjelstul World Cup Database
+          </a>
+          (CC-BY-SA 4.0). Visualization with
+          <a class="underline hover:text-slate-300" href="https://observablehq.com/plot" target="_blank" rel="noopener">Observable Plot</a>.
+          Code on
+          <a class="underline hover:text-slate-300" href="https://github.com/amirhomayunhallajian/WorldCup.Density" target="_blank" rel="noopener">GitHub</a>.
+        </footer>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
